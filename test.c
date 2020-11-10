@@ -4,9 +4,15 @@
 #include <stdlib.h>
 #include "libft.h"
 
+//Set to 1 to show runned tests, otherwise set to 0
 #define SHOW 1
 
-void	test_atoi(int expected, int actual, const char *test_case);
+char RED[] = "\033[1;31m";
+char GREEN[] = "\033[0;32m";
+char BLUE[] = "\033[0;35m";
+char RESET[]= "\033[0m";
+
+void	test_atoi(int expected, int actual);
 
 void	test_bzero(char c, size_t n, size_t size);
 
@@ -26,41 +32,43 @@ char	*test_memmove_c(void *dst, const void *src, size_t n);
 
 void	test_memchr(const void *s, int c, size_t n);
 
+void	test_memcmp(const void *s1, const void *s2, size_t n);
+
 int		main(void)
 {
-	printf("Testing ft_atoi...\n");
-	test_atoi(atoi("0"), ft_atoi("0"), "0");
-	test_atoi(atoi("-0"), ft_atoi("-0"), "-0");
-	test_atoi(atoi("+0"), ft_atoi("+0"), "+0");
-	test_atoi(atoi("-1234"), ft_atoi("-1234"), "-1234");
-	test_atoi(atoi("1234"), ft_atoi("1234"), "1234");
-	test_atoi(atoi("-1234--999"), ft_atoi("-1234--999"), "-1234--999");
-	test_atoi(atoi("01234"), ft_atoi("01234"), "01234");
-	test_atoi(atoi("-2147483648"), ft_atoi("-2147483648"), "-2147483648");
-	test_atoi(atoi("2147483647"), ft_atoi("2147483647"), "2147483647");
-	test_atoi(atoi("+-123456789"), ft_atoi("+-123456789"), "+-123456789");
-	test_atoi(atoi("i+1234"), ft_atoi("i+1234"), "i+1234");
-	test_atoi(atoi("-2147483648"), ft_atoi("-2147483648"), "-2147483648");
-	test_atoi(atoi("2147483647"), ft_atoi("2147483647"), "2147483647");
-	test_atoi(atoi("\f\n\r\t\v   -1234"), ft_atoi("\f\n\r\t\v   -1234"), "\\f\\n\\r\\t\\v   -1234");
-	test_atoi(atoi("\f\n\r\t\v   -1234aa123"), ft_atoi("\f\n\r\t\v   -1234aa123"), "\\f\\n\\r\\t\\v   -1234aa123");
-	test_atoi(atoi("\f\n\r\t\v   - 1234"), ft_atoi("\f\n\r\t\v   - 1234"), "\\f\\n\\r\\t\\v   - 1234");
-	test_atoi(atoi("\f\n\r\t\v   - \t1234"), ft_atoi("\f\n\r\t\v   - \t1234"), "\\f\\n\\r\\t\\v   - \\t1234");
-	test_atoi(atoi("\f\n\r\t\v   - \t1234 a0"), ft_atoi("\f\n\r\t\v   - \t1234 a0"), "\\f\\n\\r\\t\\v   - \\t1234 a0");
-	test_atoi(atoi("\f\n\r\t\v   - \t123\n\v4"), ft_atoi("\f\n\r\t\v   - \t123\n\v4"), "\\f\\n\\r\\t\\v   - \\t123\\n\\v4");
-	test_atoi(atoi("\f\n\r\t\v   - \t12-34 a0"), ft_atoi("\f\n\r\t\v   - \t12-34 a0"), "\\f\\n\\r\\t\\v   - \\t12-34 a0");
+	printf("%sTesting ft_atoi...%s\n", BLUE, RESET);
+	test_atoi(atoi("0"), ft_atoi("0"));
+	test_atoi(atoi("-0"), ft_atoi("-0"));
+	test_atoi(atoi("+0"), ft_atoi("+0"));
+	test_atoi(atoi("-1234"), ft_atoi("-1234"));
+	test_atoi(atoi("1234"), ft_atoi("1234"));
+	test_atoi(atoi("-1234--999"), ft_atoi("-1234--999"));
+	test_atoi(atoi("01234"), ft_atoi("01234"));
+	test_atoi(atoi("-2147483648"), ft_atoi("-2147483648"));
+	test_atoi(atoi("2147483647"), ft_atoi("2147483647"));
+	test_atoi(atoi("+-123456789"), ft_atoi("+-123456789"));
+	test_atoi(atoi("i+1234"), ft_atoi("i+1234"));
+	test_atoi(atoi("-2147483648"), ft_atoi("-2147483648"));
+	test_atoi(atoi("2147483647"), ft_atoi("2147483647"));
+	test_atoi(atoi("\f\n\r\t\v   -1234"), ft_atoi("\f\n\r\t\v   -1234"));
+	test_atoi(atoi("\f\n\r\t\v   -1234aa123"), ft_atoi("\f\n\r\t\v   -1234aa123"));
+	test_atoi(atoi("\f\n\r\t\v   - 1234"), ft_atoi("\f\n\r\t\v   - 1234"));
+	test_atoi(atoi("\f\n\r\t\v   - \t1234"), ft_atoi("\f\n\r\t\v   - \t1234"));
+	test_atoi(atoi("\f\n\r\t\v   - \t1234 a0"), ft_atoi("\f\n\r\t\v   - \t1234 a0"));
+	test_atoi(atoi("\f\n\r\t\v   - \t123\n\v4"), ft_atoi("\f\n\r\t\v   - \t123\n\v4"));
+	test_atoi(atoi("\f\n\r\t\v   - \t12-34 a0"), ft_atoi("\f\n\r\t\v   - \t12-34 a0"));
 
-	printf("\nTesting ft_bzero...\n");
+	printf("\n%sTesting ft_bzero...%s\n", BLUE, RESET);
 	test_bzero('a', 10, 20);
 	test_bzero('c', 1, 5);
 	test_bzero('-', 13, 30);
 
-	printf("\nTesting ft_memset...\n");
+	printf("\n%sTesting ft_memset...%s\n", BLUE, RESET);
 	test_memset('a', 20, 10);
 	test_memset('p', 20, 1);
 	test_memset('z', 40, 39);
 
-	printf("\nTesting ft_memcpy...\n");
+	printf("\n%sTesting ft_memcpy...%s\n", BLUE, RESET);
 	test_memcpy("hilmi", "yilmaz", 1);
 	test_memcpy("yooo", "ho", 3);
 	test_memcpy("hilmi", "yilmaz", 0);
@@ -68,10 +76,10 @@ int		main(void)
 	test_memcpy("", "", 0);
 	//test_memcpy(NULL, "", 2);
 
-	printf("\nTesting ft_memccpy...\n");
+	printf("\n%sTesting ft_memccpy...%s\n", BLUE, RESET);
 	test_memccpy("123456789", "hilmi", 'l', 5);
 
-	printf("\nTesting ft_memmove\n");
+	printf("\n%sTesting ft_memmove%s\n", BLUE, RESET);
 	test_memmove("1234", "ooo", 3);
 	test_memmove("ik zit op Codam", "hallo", 5);
 	test_memmove("yoo", "ik", 2);
@@ -79,26 +87,37 @@ int		main(void)
 	test_memmove(str, str + 2, 3);
 	test_memmove(str, str + 2, 2);
 
-	printf("\nTesting ft_memchr...\n");
+	printf("\n%sTesting ft_memchr...%s\n", BLUE, RESET);
 	test_memchr("hilmi", 'm', 5);
 	test_memchr("hilmi", 'm', 2);
 	test_memchr("hallooo", 'p', 5);
 	test_memchr("", 'o', 1);
 	test_memchr("", '\0', 1);
 
+	printf("\n%sTesting ft_memcmp...%s\n", BLUE, RESET);
+	test_memcmp("hilmi", "hilMi", 5);
+
+
 
 	return (0);
 }
 
-void	test_atoi(int expected, int actual, const char *test_case)
+void	test_atoi(int expected, int actual)
 {
-	printf("Input=%s, ", test_case);
     if (expected == actual)
-        printf("Passed\n");
+        printf("%sPassed%s", GREEN, RESET);
     else
 	{
-        printf("Failed\n");
+        printf("%sFailed%s", RED, RESET);
 	}
+
+	if (SHOW == 1)
+	{
+		printf(", own_result = %d", actual);
+		printf("c_result = %d\n", expected);
+	}
+	else
+		printf("\n");
 }
 
 /* n = how much of size to fill with bzero
@@ -128,9 +147,9 @@ void	test_bzero(char c, size_t n, size_t size)
 		i++;
 	}
 	if (i == count)
-		printf("Passed\n");
+		printf("%sPassed%s\n", GREEN, RESET);
 	else
-		printf("Failed\n");
+		printf("%sFailed%s\n", RED, RESET);
 	
 	free(c_malloc);
 	free(own_malloc);
@@ -161,9 +180,9 @@ void	test_memset(char c, size_t size_malloc, size_t size_memset)
 		i++;
 	}
 	if (i == count)
-		printf("Passed\n");
+		printf("%sPassed%s\n", GREEN, RESET);
 	else
-		printf("Failed\n");
+		printf("%sFailed%s\n", RED, RESET);
 	
 	free(c_malloc);
 	free(own_malloc);
@@ -195,9 +214,9 @@ void	test_memcpy(void *dst, const void *src, size_t n)
 		i++;
 	}	
 	if (i == count)
-		printf("Passed");
+		printf("%sPassed%s", GREEN, RESET);
 	else
-		printf("Failed");
+		printf("%sFailed%s", RED, RESET);
 
 	if (SHOW == 1)
 	{
@@ -252,9 +271,9 @@ void	test_memccpy(void *dst, const void *src, int c, size_t n)
 		i++;
 	}	
 	if (i == count)
-		printf("Passed");
+		printf("%sPassed%s", GREEN, RESET);
 	else
-		printf("Failed");
+		printf("%sFailed%s", RED, RESET);
 
 	if (SHOW == 1)
 	{
@@ -308,9 +327,9 @@ void	test_memmove(void *dst, const void *src, size_t n)
 		i++;
 	}	
 	if (i == count)
-		printf("Passed");
+		printf("%sPassed%s", GREEN, RESET);
 	else
-		printf("Failed");
+		printf("%sFailed%s", RED, RESET);
 
 	if (SHOW == 1)
 	{
@@ -352,9 +371,9 @@ void	test_memchr(const void *s, int c, size_t n)
 	own_result = ft_memchr(s, c, n);
 
 	if (c_result == own_result)
-		printf("Passed");
+		printf("%sPassed%s", GREEN, RESET);
 	else
-		printf("Failed");
+		printf("%sFailed%s", RED, RESET);
 
 	if (SHOW == 1)
 	{
@@ -363,6 +382,35 @@ void	test_memchr(const void *s, int c, size_t n)
 	}
 	else
 		printf("\n");
+
+	//free(c_result);
+	//free(own_result);
+}
+
+void	test_memcmp(const void *s1, const void *s2, size_t n)
+{
+	char	*s1_malloc;
+	char	*s2_malloc;
+	int		c_result;
+	int		own_result;
+
+	s1_malloc = strdup(s1);
+	s2_malloc = strdup(s2);
+	
+	c_result = memcmp(s1, s2, n);
+	own_result = ft_memcmp(s1, s2, n);
+
+	if (c_result > 0 && own_result > 0)
+		printf("%sPassed%s\n", GREEN, RESET);
+	else if (c_result < 0 && own_result < 0)
+		printf("%sPassed%s\n", GREEN, RESET);
+	else if (c_result == 0 && own_result == 0)
+		printf("%sPassed%s\n", GREEN, RESET);
+	else
+		printf("%sFailed%s\n", RED, RESET);
+
+	free(s1_malloc);
+	free(s2_malloc);
 }
 
 

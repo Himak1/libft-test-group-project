@@ -64,6 +64,8 @@ void	test_toupper(int c);
 
 void	test_tolower(int c);
 
+void	test_ft_split(char *str, char c);
+
 int		main(void)
 {
 	printf("%sTesting ft_atoi...%s\n", BLUE, RESET);
@@ -276,6 +278,10 @@ int		main(void)
 	test_toupper('-');
 	test_toupper('@');
 	
+	printf("\nTesting ft_split...\n");
+	printf("---ft_split cannot be compared to an offical library function---\n");
+	test_ft_split("Hello World Look It's Working", ' ');
+	test_ft_split("sssssssHellosssWorldssssss", 's');
 	return (0);
 }
 
@@ -998,7 +1004,23 @@ void	test_tolower(int c)
 }
 
 
+void	test_ft_split(char *str, char c)
+{
+	char	**returnval;//return value
+	int	iter;//for iterating through 2d array
 
+	returnval = ft_split(str, c);
+
+	iter = 0;
+	while (returnval[iter] != 0)
+	{
+		printf("%s|\n", returnval[iter]);
+		free(returnval[iter]);
+		iter++;
+	}
+	free(returnval);
+	printf("-------------------------------\n");
+}
 
 
 

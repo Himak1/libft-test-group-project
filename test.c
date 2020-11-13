@@ -1012,14 +1012,15 @@ void	test_ft_split(char *str, char c)
 	returnval = ft_split(str, c);
 
 	iter = 0;
+	printf("%sft_split's output:\n%s", BLUE, RESET);
 	while (returnval[iter] != 0)
 	{
-		printf("%sft_split's output:%s%s|\n", BLUE, RESET, returnval[iter]);
+		printf("%s|\n", returnval[iter]);
 		free(returnval[iter]);
 		iter++;
 	}
 	free(returnval);
-	printf("-------------------------------\n");
+	printf("\n");
 }
 
 

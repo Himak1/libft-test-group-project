@@ -278,7 +278,7 @@ int		main(void)
 	test_toupper('-');
 	test_toupper('@');
 	
-	printf("\nTesting ft_split...\n");
+	printf("\n%sTesting ft_split...%s\n", BLUE, RESET);
 	printf("---ft_split cannot be compared to an offical library function---\n");
 	test_ft_split("Hello World Look It's Working", ' ');
 	test_ft_split("sssssssHellosssWorldssssss", 's');
@@ -1014,7 +1014,7 @@ void	test_ft_split(char *str, char c)
 	iter = 0;
 	while (returnval[iter] != 0)
 	{
-		printf("%s|\n", returnval[iter]);
+		printf("%sft_split's output:%s%s|\n", BLUE, RESET, returnval[iter]);
 		free(returnval[iter]);
 		iter++;
 	}

@@ -2,7 +2,7 @@
 #include <string.h>
 #include <strings.h>
 #include <stdlib.h>
-#include <bsd/string.h>
+#include <string.h>
 #include <ctype.h>
 #include "libft.h"
 
@@ -65,6 +65,8 @@ void	test_toupper(int c);
 void	test_tolower(int c);
 
 void	test_ft_split(char *str, char c);
+
+void	test_ft_substr(char const *str, unsigned int start, size_t len);
 
 int		main(void)
 {
@@ -280,8 +282,19 @@ int		main(void)
 	
 	printf("\n%sTesting ft_split...%s\n", BLUE, RESET);
 	printf("---ft_split cannot be compared to an offical library function---\n");
-	test_ft_split("Hello World Look It's Working", ' ');
+	test_ft_split("  Hello World Look It's Working   ", ' ');
 	test_ft_split("sssssssHellosssWorldssssss", 's');
+	test_ft_split("HelloWorldss", 's');
+
+	printf("\n%sTesting ft_substr...%s\n", BLUE, RESET);
+	printf("---ft_substr cannot be compared to an offical library function---\n");
+	test_ft_substr("Hello World I need to find the needle in the haystack", 22, 4);
+	test_ft_substr("Hello World", 0, 5);
+	test_ft_substr("WoooowHello", 6, 5);
+	test_ft_substr("HelloHelloWorldHello", 11, 0);
+	test_ft_substr("", 0, 2);
+	
+
 	return (0);
 }
 
@@ -722,6 +735,7 @@ void	test_strlcat(char *dst, const char *src, size_t size)
 	count = 0;
 	while(i < 50)
 	{
+		printf("%c %c\n", *(c_dst_malloc + i), *(own_dst_malloc + i));
 		if (*(c_dst_malloc + i) == *(own_dst_malloc + i))
 			count++;
 		i++;
@@ -1003,7 +1017,6 @@ void	test_tolower(int c)
 		printf("\n");
 }
 
-
 void	test_ft_split(char *str, char c)
 {
 	char	**returnval;//return value
@@ -1023,19 +1036,14 @@ void	test_ft_split(char *str, char c)
 	printf("\n");
 }
 
+void	test_ft_substr(char const *str, unsigned int start, size_t len)
+{
+	char	*returnval;
+	//int		i;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	printf("%sft_split's output:\n%s", BLUE, RESET);
+	returnval = ft_substr(str, start, len);
+	printf("%s|\n", returnval);
+	free(returnval);
+}
 

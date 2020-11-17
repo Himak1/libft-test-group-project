@@ -2,7 +2,7 @@
 #include <string.h>
 #include <strings.h>
 #include <stdlib.h>
-#include <bsd/string.h>
+//#include <string.h>
 #include <ctype.h>
 #include "libft.h"
 
@@ -67,6 +67,10 @@ void	test_tolower(int c);
 void	test_ft_split(char *str, char c);
 
 void	test_ft_substr(char const *str, unsigned int start, size_t len);
+
+void	test_ft_strtrim(char const *str, char const *rm);
+
+void	test_ft_strjoin(char const *str1, char const *str2);
 
 int		main(void)
 {
@@ -284,7 +288,9 @@ int		main(void)
 	printf("---ft_split cannot be compared to an offical library function---\n");
 	test_ft_split("  Hello World Look It's Working   ", ' ');
 	test_ft_split("sssssssHellosssWorldssssss", 's');
-	test_ft_split("HelloWorldss", 's');
+	test_ft_split("HellosWorldss", 's');
+	test_ft_split("sHelloWorlds", 's');
+	test_ft_split("      split       this for   me  !       ", ' ');
 
 	printf("\n%sTesting ft_substr...%s\n", BLUE, RESET);
 	printf("---ft_substr cannot be compared to an offical library function---\n");
@@ -294,7 +300,17 @@ int		main(void)
 	test_ft_substr("HelloHelloWorldHello", 11, 0);
 	test_ft_substr("", 0, 2);
 	
+	printf("\n%sTesting ft_strtrim...%s\n", BLUE, RESET);
+	printf("---ft_strtrim cannot be compared to an offical library function---\n");
+	test_ft_strtrim("sssssHelloWorldsss", "s");
+	test_ft_strtrim("skHelloskskWorld", "sk");
+	test_ft_strtrim("What is  this supposed to return?", "ss");
 
+	printf("\n%sTesting ft_strjoin...%s\n", BLUE, RESET);
+	printf("---ft_strjoin cannot be compared to an offical library function---\n");
+	test_ft_strjoin("Joined", "succesfully");
+	test_ft_strjoin("", "");
+	test_ft_strjoin("1string", "");
 	return (0);
 }
 
@@ -1041,9 +1057,27 @@ void	test_ft_substr(char const *str, unsigned int start, size_t len)
 	char	*returnval;
 	//int		i;
 
-	printf("%sft_split's output:\n%s", BLUE, RESET);
+	printf("%sft_substr's output:\n%s", BLUE, RESET);
 	returnval = ft_substr(str, start, len);
 	printf("%s|\n", returnval);
 	free(returnval);
 }
 
+void	test_ft_strtrim(char const *str, char const *rm)
+{
+	char	*trimmed;
+
+	printf("%sft_strtrim's output:\n%s", BLUE, RESET);
+	trimmed = ft_strtrim(str, rm);
+	printf("%s|\n", trimmed);
+	free(trimmed);
+}
+
+void	test_ft_strjoin(char const *str1, char const *str2)
+{
+	char	*joined;
+
+	printf("%sft_strjoin's output:\n%s", BLUE, RESET);
+	joined = ft_strjoin(str1, str2);
+	printf("%s|\n", joined);
+}

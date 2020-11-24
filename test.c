@@ -2,7 +2,7 @@
 #include <string.h>
 #include <strings.h>
 #include <stdlib.h>
-//#include <string.h>
+#include <bsd/string.h>
 #include <ctype.h>
 #include "libft.h"
 
@@ -72,7 +72,11 @@ void	test_ft_strtrim(char const *str, char const *rm);
 
 void	test_ft_strjoin(char const *str1, char const *str2);
 
+<<<<<<< HEAD
 void	test_ft_putnbr_fd(int n);
+=======
+void	test_ft_itoa(int input);
+>>>>>>> e3b4996de5ea23f1b8846b7648b8afc50af6fb66
 
 int		main(void)
 {
@@ -320,6 +324,14 @@ int		main(void)
 	printf("---ft_putnbr_fd cannot be compared to an offical library function---\n");
 	test_ft_putnbr_fd(-2147483648);
 	test_ft_putnbr_fd(1);
+
+
+	printf("\n%sTesting ft_itoa...%s\n", BLUE, RESET);
+	printf("---ft_itoa cannot be compared to an offical library function---\n");
+	test_ft_itoa(-623);
+	test_ft_itoa(156);
+	test_ft_itoa(-0);
+	test_ft_itoa(-2147483647 - 1);
 
 	return (0);
 }
@@ -1093,8 +1105,21 @@ void	test_ft_strjoin(char const *str1, char const *str2)
 	printf("%s|\n", joined);
 }
 
+<<<<<<< HEAD
 void	test_ft_putnbr_fd(int n)
 {
 	ft_putnbr_fd(n ,1);
 	printf("\n");
+=======
+void	test_ft_itoa(int input)
+{
+	char	*ret;
+	int	num;
+
+	printf("%sft_itoa's output:\n%s", BLUE, RESET);
+	ret = ft_itoa(input);
+	num = ft_atoi(ret);
+	printf("%s|%d\n", ret, num);
+	free(ret);
+>>>>>>> e3b4996de5ea23f1b8846b7648b8afc50af6fb66
 }

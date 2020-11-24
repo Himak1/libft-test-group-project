@@ -2,7 +2,7 @@
 #include <string.h>
 #include <strings.h>
 #include <stdlib.h>
-#include <bsd/string.h>
+//#include <bsd/string.h>
 #include <ctype.h>
 #include "libft.h"
 
@@ -72,11 +72,9 @@ void	test_ft_strtrim(char const *str, char const *rm);
 
 void	test_ft_strjoin(char const *str1, char const *str2);
 
-<<<<<<< HEAD
 void	test_ft_putnbr_fd(int n);
-=======
+
 void	test_ft_itoa(int input);
->>>>>>> e3b4996de5ea23f1b8846b7648b8afc50af6fb66
 
 int		main(void)
 {
@@ -1105,12 +1103,11 @@ void	test_ft_strjoin(char const *str1, char const *str2)
 	printf("%s|\n", joined);
 }
 
-<<<<<<< HEAD
 void	test_ft_putnbr_fd(int n)
 {
 	ft_putnbr_fd(n ,1);
 	printf("\n");
-=======
+}
 void	test_ft_itoa(int input)
 {
 	char	*ret;
@@ -1121,5 +1118,4 @@ void	test_ft_itoa(int input)
 	num = ft_atoi(ret);
 	printf("%s|%d\n", ret, num);
 	free(ret);
->>>>>>> e3b4996de5ea23f1b8846b7648b8afc50af6fb66
 }

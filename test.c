@@ -73,11 +73,10 @@ void	test_ft_strtrim(char const *str, char const *rm);
 void	test_ft_strjoin(char const *str1, char const *str2);
 
 void	test_ft_putnbr_fd(int n);
-<<<<<<< HEAD
-=======
+
 
 void	test_ft_itoa(int input);
->>>>>>> refs/remotes/origin/main
+
 
 int		main(void)
 {
@@ -1064,12 +1063,9 @@ void	test_ft_split(char *str, char c)
 	char	**returnval;//return value
 	int	iter;//for iterating through 2d array
 
-<<<<<<< HEAD
-=======
 	returnval = ft_split(str, c);
 	if (returnval == 0)
 		return ;
->>>>>>> refs/remotes/origin/main
 	iter = 0;
 	returnval = ft_split(str, c);
 	printf("%sft_split's output:\n%s", BLUE, RESET);
@@ -1124,8 +1120,4 @@ void	test_ft_putnbr_fd(int n)
 	ft_putnbr_fd(n ,1);
 	printf("\n");
 }
-void	test_ft_itoa(int input)
-{
-	ft_putnbr_fd(n ,1);
-	printf("\n");
-}
+

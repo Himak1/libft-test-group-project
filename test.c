@@ -2,7 +2,7 @@
 #include <string.h>
 #include <strings.h>
 #include <stdlib.h>
-#include <bsd/string.h>
+//#include <bsd/string.h>
 #include <ctype.h>
 #include "libft.h"
 
@@ -73,6 +73,11 @@ void	test_ft_strtrim(char const *str, char const *rm);
 void	test_ft_strjoin(char const *str1, char const *str2);
 
 void	test_ft_putnbr_fd(int n);
+<<<<<<< HEAD
+=======
+
+void	test_ft_itoa(int input);
+>>>>>>> refs/remotes/origin/main
 
 int		main(void)
 {
@@ -297,6 +302,7 @@ int		main(void)
 	test_ft_split("sHelloWorlds", 's');
 	test_ft_split("      split       this for   me  !       ", ' ');
 	test_ft_split("test123", '\0');
+	test_ft_split("", 'z');
 
 	printf("\n%sTesting ft_substr...%s\n", BLUE, RESET);
 	printf("---ft_substr cannot be compared to an offical library function---\n");
@@ -323,6 +329,13 @@ int		main(void)
 	printf("---ft_putnbr_fd cannot be compared to an offical library function---\n");
 	test_ft_putnbr_fd(-2147483648);
 	test_ft_putnbr_fd(1);
+
+	printf("\n%sTesting ft_itoa...%s\n", BLUE, RESET);
+	printf("---ft_itoa cannot be compared to an offical library function---\n");
+	test_ft_itoa(-623);
+	test_ft_itoa(156);
+	test_ft_itoa(-0);
+	test_ft_itoa(-2147483647 - 1);
 
 	return (0);
 }
@@ -1051,6 +1064,12 @@ void	test_ft_split(char *str, char c)
 	char	**returnval;//return value
 	int	iter;//for iterating through 2d array
 
+<<<<<<< HEAD
+=======
+	returnval = ft_split(str, c);
+	if (returnval == 0)
+		return ;
+>>>>>>> refs/remotes/origin/main
 	iter = 0;
 	returnval = ft_split(str, c);
 	printf("%sft_split's output:\n%s", BLUE, RESET);
@@ -1101,6 +1120,11 @@ void	test_ft_strjoin(char const *str1, char const *str2)
 }
 
 void	test_ft_putnbr_fd(int n)
+{
+	ft_putnbr_fd(n ,1);
+	printf("\n");
+}
+void	test_ft_itoa(int input)
 {
 	ft_putnbr_fd(n ,1);
 	printf("\n");
